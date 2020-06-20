@@ -10,5 +10,7 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Meeting> Meetings { get; set; }
+
+        public DbSet<MeetingType> MeetingTypes { get; set; }
     }
 }
