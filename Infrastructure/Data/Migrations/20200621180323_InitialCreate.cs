@@ -32,7 +32,8 @@ namespace Infrastructure.Data.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MeetingTypeId = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

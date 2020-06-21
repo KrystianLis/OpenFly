@@ -23,6 +23,7 @@ namespace API
                 {
                     var context = services.GetRequiredService<MeetingContext>();
                     await context.Database.MigrateAsync();
+                    await MeetingContextSeed.SeedAsync(context, loggerFactory);
                 }
                 catch(Exception ex)
                 {
