@@ -13,7 +13,7 @@ namespace Core.Entities
         public DateTime Date { get; set; }
         public string PictureUrl { get; set; }
         public MeetingType MeetingType { get; set; }
-        public int ProductTypeId { get; set; }
-
+        public int MeetingTypeId { get; set; }
+        public decimal Price { get; set; }
     }
 }
