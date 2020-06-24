@@ -8,5 +8,6 @@ namespace Core.Interfaces
     {
         Task<Meeting> GetMeetingByIdAsync(int id);
         Task<IReadOnlyList<Meeting>> GetMeetingsAsync();
+        Task<IReadOnlyList<MeetingType>> GetMeetingTypesAsync();
     }
 }

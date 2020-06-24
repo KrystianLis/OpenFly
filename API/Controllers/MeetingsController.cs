@@ -30,5 +30,11 @@ namespace API.Controllers
         {
             return await _repo.GetMeetingByIdAsync(id);
         }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<MeetingType>>> GetMeetingTypes()
+        {
+            return Ok(await _repo.GetMeetingTypesAsync());
+        }
     }
 }
