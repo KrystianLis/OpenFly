@@ -18,12 +18,16 @@ namespace Infrastructure.Data
 
         public async Task<Meeting> GetMeetingByIdAsync(int id)
         {
-            return await _context.Meetings.FindAsync(id);
+            return await _context.Meetings
+                                .Include(x => x.MeetingType)
+                                .FirstOrDefaultAsync(x => x. Id == id);
         }
 
         public async Task<IReadOnlyList<Meeting>> GetMeetingsAsync()
         {
-            return await _context.Meetings.ToListAsync();
+            return await _context.Meetings
+                .Include(x => x.MeetingType)
+                .ToListAsync();
         }
 
         public async Task<IReadOnlyList<MeetingType>> GetMeetingTypesAsync()
