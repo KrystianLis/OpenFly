@@ -10,17 +10,19 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class MeetingsController : Controller
     {
-        private readonly IMeetingRepository _repo;
+        private readonly IGenericRepository<Meeting> _meetingRepo;
+        private readonly IGenericRepository<MeetingType> _meetingTypeRepo;
 
-        public MeetingsController(IMeetingRepository repo)
+        public MeetingsController(IGenericRepository<Meeting> meetingRepo, IGenericRepository<MeetingType> meetingTypeRepo)
         {
-            _repo = repo;
+            _meetingRepo = meetingRepo;
+            _meetingTypeRepo = meetingTypeRepo;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Meeting>>> GetMeetings()
         {
-            var meetings = await _repo.GetMeetingsAsync();
+            var meetings = await _meetingRepo.GetListAsync();
 
             return Ok(meetings);
         }
@@ -28,13 +30,13 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Meeting>> GetMeeting(int id)
         {
-            return await _repo.GetMeetingByIdAsync(id);
+            return await _meetingRepo.GetByIdAsync(id);
         }
 
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<MeetingType>>> GetMeetingTypes()
         {
-            return Ok(await _repo.GetMeetingTypesAsync());
+            return Ok(await _meetingTypeRepo.GetListAsync());
         }
     }
 }
