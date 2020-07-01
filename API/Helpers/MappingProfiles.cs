@@ -9,7 +9,8 @@ namespace API.Helpers
         public MappingProfiles()
         {
             CreateMap<Meeting, MeetingDto>()
-                .ForMember(d => d.MeetingType, o => o.MapFrom(s => s.MeetingType.Name));
+                .ForMember(d => d.MeetingType, o => o.MapFrom(s => s.MeetingType.Name))
+                .ForMember(d => d.PictureUrl, o => o.MapFrom<MeetingUrlResolver>());
         }
     }
 }
