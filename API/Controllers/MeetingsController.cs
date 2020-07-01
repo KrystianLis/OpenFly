@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using API.DTO;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
@@ -21,20 +23,44 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Meeting>>> GetMeetings()
+        public async Task<ActionResult<List<MeetingDto>>> GetMeetings()
         {
             var spec = new MeetingsWithTypesSpecification();
 
             var meetings = await _meetingRepo.ListAsync(spec);
 
-            return Ok(meetings);
+            return meetings.Select(meeting => new MeetingDto
+            {
+                Id = meeting.Id,
+                Name = meeting.Name,
+                Description = meeting.Description,
+                PictureUrl = meeting.PictureUrl,
+                Place = meeting.Place,
+                Date = meeting.Date,
+                MeetingType = meeting.MeetingType.Name,
+                Count = meeting.Count,
+                Price = meeting.Price,
+            }).ToList();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Meeting>> GetMeeting(int id)
+        public async Task<ActionResult<MeetingDto>> GetMeeting(int id)
         {
             var spec = new MeetingsWithTypesSpecification(id);
-            return await _meetingRepo.GetEntityWithSpec(spec);
+            var meeting = await _meetingRepo.GetEntityWithSpec(spec);
+
+            return new MeetingDto
+            {
+                Id = meeting.Id,
+                Name = meeting.Name,
+                Description = meeting.Description,
+                PictureUrl = meeting.PictureUrl,
+                Place = meeting.Place,
+                Date = meeting.Date,
+                MeetingType = meeting.MeetingType.Name,
+                Count = meeting.Count,
+                Price = meeting.Price,
+            };
         }
 
         [HttpGet("types")]
