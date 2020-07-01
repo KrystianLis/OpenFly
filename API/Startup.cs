@@ -1,3 +1,5 @@
+using API.Helpers;
+using AutoMapper;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -24,6 +26,7 @@ namespace API
         {
             services.AddScoped<IMeetingRepository, MeetingRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             services.AddDbContext<MeetingContext>(x => 
                 x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));

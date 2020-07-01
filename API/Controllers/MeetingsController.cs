@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using API.DTO;
+using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
@@ -15,32 +15,23 @@ namespace API.Controllers
     {
         private readonly IGenericRepository<Meeting> _meetingRepo;
         private readonly IGenericRepository<MeetingType> _meetingTypeRepo;
+        private readonly IMapper _mapper;
 
-        public MeetingsController(IGenericRepository<Meeting> meetingRepo, IGenericRepository<MeetingType> meetingTypeRepo)
+        public MeetingsController(IGenericRepository<Meeting> meetingRepo, IGenericRepository<MeetingType> meetingTypeRepo, IMapper mapper)
         {
             _meetingRepo = meetingRepo;
             _meetingTypeRepo = meetingTypeRepo;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<MeetingDto>>> GetMeetings()
+        public async Task<ActionResult<IReadOnlyList<MeetingDto>>> GetMeetings()
         {
             var spec = new MeetingsWithTypesSpecification();
 
             var meetings = await _meetingRepo.ListAsync(spec);
 
-            return meetings.Select(meeting => new MeetingDto
-            {
-                Id = meeting.Id,
-                Name = meeting.Name,
-                Description = meeting.Description,
-                PictureUrl = meeting.PictureUrl,
-                Place = meeting.Place,
-                Date = meeting.Date,
-                MeetingType = meeting.MeetingType.Name,
-                Count = meeting.Count,
-                Price = meeting.Price,
-            }).ToList();
+            return Ok(_mapper.Map<IReadOnlyList<Meeting>, IReadOnlyList<MeetingDto>>(meetings));
         }
 
         [HttpGet("{id}")]
@@ -49,18 +40,7 @@ namespace API.Controllers
             var spec = new MeetingsWithTypesSpecification(id);
             var meeting = await _meetingRepo.GetEntityWithSpec(spec);
 
-            return new MeetingDto
-            {
-                Id = meeting.Id,
-                Name = meeting.Name,
-                Description = meeting.Description,
-                PictureUrl = meeting.PictureUrl,
-                Place = meeting.Place,
-                Date = meeting.Date,
-                MeetingType = meeting.MeetingType.Name,
-                Count = meeting.Count,
-                Price = meeting.Price,
-            };
+            return _mapper.Map<Meeting, MeetingDto>(meeting);
         }
 
         [HttpGet("types")]
