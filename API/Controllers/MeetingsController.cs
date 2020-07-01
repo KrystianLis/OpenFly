@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specification;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -22,7 +23,9 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Meeting>>> GetMeetings()
         {
-            var meetings = await _meetingRepo.GetListAsync();
+            var spec = new MeetingsWithTypesSpecification();
+
+            var meetings = await _meetingRepo.ListAsync(spec);
 
             return Ok(meetings);
         }
@@ -36,7 +39,7 @@ namespace API.Controllers
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<MeetingType>>> GetMeetingTypes()
         {
-            return Ok(await _meetingTypeRepo.GetListAsync());
+            return Ok(await _meetingTypeRepo.ListAsync());
         }
     }
 }
