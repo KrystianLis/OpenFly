@@ -33,7 +33,8 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Meeting>> GetMeeting(int id)
         {
-            return await _meetingRepo.GetByIdAsync(id);
+            var spec = new MeetingsWithTypesSpecification(id);
+            return await _meetingRepo.GetEntityWithSpec(spec);
         }
 
         [HttpGet("types")]
