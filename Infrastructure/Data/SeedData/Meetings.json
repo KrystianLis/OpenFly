@@ -4,7 +4,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
     "Place": "Address 1",
     "Date": "2019-01-06T17:16:40",
-    "PictureUrl": "images/sports/sb-ang1.png",
+    "PictureUrl": "images/sports/football.png",
     "MeetingTypeId": 12,
     "Price": 5,
     "Count": 5
@@ -14,7 +14,7 @@
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Place": "Address 2",
     "Date": "2020-10-06T17:15:00",
-    "PictureUrl": "images/sports/sb-ang2.png",
+    "PictureUrl": "images/sports/badminton.png",
     "MeetingTypeId": 6,
     "Price": 5,
     "Count": 1
@@ -24,7 +24,7 @@
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc.",
     "Place": "Address 3",
     "Date": "2020-12-30T14:30:00",
-    "PictureUrl": "images/sports/sb-core1.png",
+    "PictureUrl": "images/sports/mountain.png",
     "MeetingTypeId": 3,
     "Price": 5,
     "Count": 10
@@ -34,7 +34,7 @@
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
     "Place": "Address 4",
     "Date": "2021-02-18T10:15:00",
-    "PictureUrl": "images/sportss/sb-core2.png",
+    "PictureUrl": "images/sports/iqlearning.png",
     "MeetingTypeId": 9,
     "Price": 5,
     "Count": 15
@@ -44,7 +44,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
     "Place": "Address 5",
     "Date": "2021-01-10T12:10:00",
-    "PictureUrl": "images/sports/sb-react1.png",
+    "PictureUrl": "images/sports/calisthenics.png",
     "MeetingTypeId": 2,
     "Price": 0,
     "Count": 50
