@@ -25,7 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<MeetingDto>>> GetMeetings([FromBody]MeetingSpecParams meetingParams)
+        public async Task<ActionResult<IReadOnlyList<MeetingDto>>> GetMeetings([FromQuery]MeetingSpecParams meetingParams)
         {
             var spec = new MeetingsWithTypesSpecification(meetingParams);
 
