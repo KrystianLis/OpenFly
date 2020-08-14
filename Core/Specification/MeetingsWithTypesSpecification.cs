@@ -7,7 +7,7 @@ namespace Core.Specification
         public MeetingsWithTypesSpecification(string sort)
         {
             AddInclude(x => x.MeetingType);
-            AddOrderBy(x => x.Name)
+            AddOrderBy(x => x.Name);
 
             if(!string.IsNullOrEmpty(sort))
             {
