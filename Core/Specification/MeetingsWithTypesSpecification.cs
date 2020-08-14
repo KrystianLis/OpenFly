@@ -4,16 +4,17 @@ namespace Core.Specification
 {
     public class MeetingsWithTypesSpecification : BaseSpecification<Meeting>
     {
-        public MeetingsWithTypesSpecification(string sort, int? typeId)
-            : base(x => (!typeId.HasValue || x.MeetingTypeId == typeId)
+        public MeetingsWithTypesSpecification(MeetingSpecParams meetingParams)
+            : base(x => (!meetingParams.TypeId.HasValue || x.MeetingTypeId == meetingParams.TypeId)
             )
         {
             AddInclude(x => x.MeetingType);
             AddOrderBy(x => x.Name);
+            ApplyPaging(meetingParams.PageSize * (meetingParams.PageIndex - 1), meetingParams.PageSize);
 
-            if(!string.IsNullOrEmpty(sort))
+            if (!string.IsNullOrEmpty(meetingParams.Sort))
             {
-                switch(sort)
+                switch(meetingParams.Sort)
                 {
                     case "dateAsc":
                         AddOrderBy(p => p.Date);
