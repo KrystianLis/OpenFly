@@ -13,7 +13,12 @@ namespace API.Extensions
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "OpenFly Api",
-                    Version = "v1"
+                    Version = "v1",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Krystian Lis",
+                        Email = "lis.krystian.10@gmail.com"
+                    }
                 });
             });
 
