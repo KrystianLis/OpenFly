@@ -25,9 +25,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<MeetingDto>>> GetMeetings(string sort)
+        public async Task<ActionResult<IReadOnlyList<MeetingDto>>> GetMeetings(string sort, int? typeId)
         {
-            var spec = new MeetingsWithTypesSpecification(sort);
+            var spec = new MeetingsWithTypesSpecification(sort, typeId);
 
             var meetings = await _meetingRepo.ListAsync(spec);
 
