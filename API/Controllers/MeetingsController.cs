@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using API.DTO;
 using API.Errors;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
@@ -25,13 +26,19 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<MeetingDto>>> GetMeetings([FromQuery]MeetingSpecParams meetingParams)
+        public async Task<ActionResult<Pagination<MeetingDto>>> GetMeetings([FromQuery]MeetingSpecParams meetingParams)
         {
             var spec = new MeetingsWithTypesSpecification(meetingParams);
 
+            var countSpec = new MeetingWithFilterCountSpecification(meetingParams);
+
+            var totalItems = await _meetingRepo.CountAsync(countSpec);
+
             var meetings = await _meetingRepo.ListAsync(spec);
 
-            return Ok(_mapper.Map<IReadOnlyList<Meeting>, IReadOnlyList<MeetingDto>>(meetings));
+            var data = _mapper.Map<IReadOnlyList<Meeting>, IReadOnlyList<MeetingDto>>(meetings);
+
+            return Ok(new Pagination<MeetingDto>(meetingParams.PageIndex, meetingParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
