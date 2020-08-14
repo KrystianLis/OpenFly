@@ -9,9 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class MeetingsController : Controller
+    public class MeetingsController : BaseApiController
     {
         private readonly IGenericRepository<Meeting> _meetingRepo;
         private readonly IGenericRepository<MeetingType> _meetingTypeRepo;
