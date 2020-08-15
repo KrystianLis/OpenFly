@@ -5,8 +5,9 @@ namespace Core.Specification
     public class MeetingsWithTypesSpecification : BaseSpecification<Meeting>
     {
         public MeetingsWithTypesSpecification(MeetingSpecParams meetingParams)
-            : base(x => (!meetingParams.TypeId.HasValue || x.MeetingTypeId == meetingParams.TypeId)
-            )
+            : base(x => 
+                (string.IsNullOrEmpty(meetingParams.Search) || x.Name.ToLower().Contains(meetingParams.Search)) &&
+                (!meetingParams.TypeId.HasValue || x.MeetingTypeId == meetingParams.TypeId))
         {
             AddInclude(x => x.MeetingType);
             AddOrderBy(x => x.Name);
