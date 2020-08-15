@@ -23,7 +23,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<MeetingContext>(x => 
+            services.AddDbContext<MeetingContext>(x =>
                 x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
 
             services.AddApplicationServices();

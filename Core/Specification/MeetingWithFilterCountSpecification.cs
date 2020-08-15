@@ -7,7 +7,6 @@ namespace Core.Specification
         public MeetingWithFilterCountSpecification(MeetingSpecParams meetingParams)
             : base(x => (!meetingParams.TypeId.HasValue || x.MeetingTypeId == meetingParams.TypeId))
         {
-            
         }
     }
 }

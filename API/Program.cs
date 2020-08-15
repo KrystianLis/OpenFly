@@ -25,7 +25,7 @@ namespace API
                     await context.Database.MigrateAsync();
                     await MeetingContextSeed.SeedAsync(context, loggerFactory);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     var logger = loggerFactory.CreateLogger<Program>();
                     logger.LogError(ex, "An error ocured during migration");

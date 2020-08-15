@@ -26,7 +26,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Pagination<MeetingDto>>> GetMeetings([FromQuery]MeetingSpecParams meetingParams)
+        public async Task<ActionResult<Pagination<MeetingDto>>> GetMeetings([FromQuery] MeetingSpecParams meetingParams)
         {
             var spec = new MeetingsWithTypesSpecification(meetingParams);
 
@@ -49,7 +49,7 @@ namespace API.Controllers
             var spec = new MeetingsWithTypesSpecification(id);
             var meeting = await _meetingRepo.GetEntityWithSpec(spec);
 
-            if(meeting is null)
+            if (meeting is null)
             {
                 return NotFound(new ApiResponse(404));
             }

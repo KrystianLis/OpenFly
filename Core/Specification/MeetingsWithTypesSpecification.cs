@@ -14,7 +14,7 @@ namespace Core.Specification
 
             if (!string.IsNullOrEmpty(meetingParams.Sort))
             {
-                switch(meetingParams.Sort)
+                switch (meetingParams.Sort)
                 {
                     case "dateAsc":
                         AddOrderBy(p => p.Date);

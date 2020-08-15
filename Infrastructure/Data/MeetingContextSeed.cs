@@ -41,7 +41,7 @@ namespace Infrastructure.Data
                     await context.SaveChangesAsync();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var logger = loggerFactory.CreateLogger<MeetingContextSeed>();
                 logger.LogError(ex.Message);

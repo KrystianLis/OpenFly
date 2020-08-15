@@ -13,7 +13,7 @@ namespace API.Errors
 
         private string GetDefaultMessageForStatusCode(int statusCode)
         {
-            return statusCode switch 
+            return statusCode switch
             {
                 400 => "A bad request, you have made",
                 401 => "Authorized, you are not",
