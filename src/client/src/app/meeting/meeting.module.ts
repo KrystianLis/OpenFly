@@ -8,6 +8,7 @@ import { MeetingComponent } from './meeting.component';
   declarations: [MeetingComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [MeetingComponent]
 })
 export class MeetingModule { }
