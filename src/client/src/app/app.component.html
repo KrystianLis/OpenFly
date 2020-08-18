@@ -2,4 +2,9 @@
 
 <div class="container" style="margin-top: 140px; margin-left: 140px;">
     <h1>OpenFly</h1>
+    <ul>
+        <li class="list-unstyled" *ngFor="let meeting of meetings">
+            {{meeting.name}}
+        </li>
+    </ul>
 </div>
