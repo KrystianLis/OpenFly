@@ -1,0 +1,18 @@
+<div class="card h-100 shadow-sm">
+  <img src="{{ meeting.pictureUrl }}" alt="" class="img-fluid width:100%" />
+  <div class="card-body d-flex flex-column">
+    <a href="#">
+      <h6 class="text-uppercase">{{ meeting.name }}</h6>
+    </a>
+    <span class="mb-2">{{ meeting.date | date: "d MMMM y h:mm a" }}</span>
+    <span class="mb-2">{{ meeting.price | currency }}</span>
+
+    <div class="btn-group mt-auto">
+      <button
+        type="button"
+        class="btn btn-outline-secondary fa fa-user-plus mr-2"
+      ></button>
+      <button type="button" class="btn btn-outline-secondary">Information</button>
+    </div>
+  </div>
+</div>
