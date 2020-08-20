@@ -1,7 +1,4 @@
-import { IMeeting } from './shared/models/meeting';
-import { IPagination } from './shared/models/pagination';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
