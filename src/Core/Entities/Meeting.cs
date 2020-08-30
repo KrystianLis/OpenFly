@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Entities
 {
@@ -6,12 +7,16 @@ namespace Core.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Place { get; set; }
+        public User Organizer { get; set;}
+        public int OrganizerId { get; set; }
+        public bool IsPrivate { get; set; }
+        public Location Location { get; set; }
+        public int LocationId { get; set; }
         public DateTime Date { get; set; }
         public string PictureUrl { get; set; }
         public MeetingType MeetingType { get; set; }
         public int MeetingTypeId { get; set; }
-        public decimal Price { get; set; }
-        public int? Count { get; set; }
+        public decimal? Price { get; set; }
+        public IReadOnlyList<UserMeeting> UserMeeting { get; set; }
     }
 }
