@@ -22,17 +22,6 @@ namespace Infrastructure.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            modelBuilder.Entity<UserMeeting>()
-                .HasKey(x => new { x.UserId, x.MeetingId });
-            modelBuilder.Entity<UserMeeting>()
-                .HasOne(x => x.Meeting)
-                .WithMany(x => x.UserMeeting)
-                .HasForeignKey(x => x.MeetingId);
-            modelBuilder.Entity<UserMeeting>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.UserMeeting)
-                .HasForeignKey(x => x.UserId);
-
             if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
             {
                 foreach (var entityType in modelBuilder.Model.GetEntityTypes())
