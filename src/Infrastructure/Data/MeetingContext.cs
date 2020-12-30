@@ -1,7 +1,10 @@
 ﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
@@ -15,7 +18,7 @@ namespace Infrastructure.Data
         public DbSet<MeetingType> MeetingTypes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<UserMeeting> UserMeetings { get; set; }
+        public DbSet<UserMeeting> UsersMeetings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +37,27 @@ namespace Infrastructure.Data
                     }
                 }
             }
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker
+                        .Entries()
+                        .Where(e => e.Entity is BaseEntity && (
+                        e.State == EntityState.Added
+                        || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                ((BaseEntity)entityEntry.Entity).DateModified = DateTime.Now;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entityEntry.Entity).DateCreated = DateTime.Now;
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }
