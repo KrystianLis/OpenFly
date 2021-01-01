@@ -38,12 +38,12 @@ namespace API.Middleware
                     ? new ApiException((int)HttpStatusCode.InternalServerError, ex.Message, ex.StackTrace.ToString())
                     : new ApiException((int)HttpStatusCode.InternalServerError);
 
-                var otpion = new JsonSerializerOptions
+                var option = new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 };
 
-                var json = JsonSerializer.Serialize(response, otpion);
+                var json = JsonSerializer.Serialize(response, option);
                 await context.Response.WriteAsync(json);
             }
         }
