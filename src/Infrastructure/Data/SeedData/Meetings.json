@@ -2,7 +2,8 @@
   {
     "Name": "Football Night",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
-    "Place": "Address 1",
+    "IsPrivate": true,
+    "LocationId": 1,
     "Date": "2019-01-06T17:16:40",
     "PictureUrl": "images/sports/football.png",
     "MeetingTypeId": 12,
@@ -12,7 +13,8 @@
   {
     "Name": "Badminton Morning",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
-    "Place": "Address 2",
+    "IsPrivate": false,
+    "LocationId": 2,
     "Date": "2020-10-06T17:15:00",
     "PictureUrl": "images/sports/badminton.png",
     "MeetingTypeId": 6,
@@ -22,7 +24,8 @@
   {
     "Name": "Mountain Trip",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc.",
-    "Place": "Address 3",
+    "IsPrivate": true,
+    "LocationId": 3,
     "Date": "2020-12-30T14:30:00",
     "PictureUrl": "images/sports/mountain.png",
     "MeetingTypeId": 3,
@@ -32,7 +35,8 @@
   {
     "Name": "IQ Learning",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-    "Place": "Address 4",
+    "IsPrivate": false,
+    "LocationId": 2,
     "Date": "2021-02-18T10:15:00",
     "PictureUrl": "images/sports/iqlearning.png",
     "MeetingTypeId": 9,
@@ -42,7 +46,8 @@
   {
     "Name": "Calisthenics",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-    "Place": "Address 5",
+    "IsPrivate": false,
+    "LocationId": 3,
     "Date": "2021-01-10T12:10:00",
     "PictureUrl": "images/sports/calisthenics.png",
     "MeetingTypeId": 2,

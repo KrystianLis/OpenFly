@@ -15,6 +15,19 @@ namespace Infrastructure.Data
         {
             try
             {
+                if (!context.Locations.Any())
+                {
+                    var locationsData = File.ReadAllText("../Infrastructure/Data/SeedData/Locations.json");
+                    var locations = JsonSerializer.Deserialize<List<Location>>(locationsData);
+
+                    foreach (var item in locations)
+                    {
+                        context.Locations.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+
                 if (!context.MeetingTypes.Any())
                 {
                     var typesData = File.ReadAllText("../Infrastructure/Data/SeedData/Types.json");
