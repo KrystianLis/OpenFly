@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace Core.Entities

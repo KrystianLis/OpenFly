@@ -1,3 +1,5 @@
+using Core.Identity;
+
 namespace Core.Entities
 {
     public class UserMeeting

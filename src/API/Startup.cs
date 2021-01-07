@@ -1,6 +1,7 @@
 using API.Extensions;
 using API.Middleware;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,8 +27,14 @@ namespace API
             services.AddDbContext<MeetingContext>(x =>
                 x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<AppIdentityDbContext>(x =>
+            {
+                x.UseSqlServer(_config.GetConnectionString("IdentityConnection"));
+            });
+
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();
+
 
             services.AddCors(opt =>
             {
