@@ -1,4 +1,6 @@
 ﻿using Core.Entities;
+using Core.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,28 @@ namespace Infrastructure.Data
 {
     public class AppDbContextSeed
     {
+        public static async Task SeedUserAsync(UserManager<User> userManager)
+        {
+            if (!userManager.Users.Any())
+            {
+                var user = new User
+                {
+                    UserName = "Alcatraz",
+                    Email = "test@test.com",
+                    Address = new Address
+                    {
+                        FirstName = "Alc",
+                        LastName = "Traz",
+                        Street = "Do Studzienki 32",
+                        City = "Gdańsk",
+                        ZipCode = "80-227"
+                    }
+                };
+
+                await userManager.CreateAsync(user, "P@ssword1!");
+            }
+        }
+
         public static async Task SeedAsync(AppDbContext context, ILoggerFactory loggerFactory)
         {
             try
