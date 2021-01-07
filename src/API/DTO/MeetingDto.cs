@@ -12,7 +12,6 @@ namespace API.DTO
         public string Organizer { get; set;}
         public bool IsPrivate { get; set; }
         public Location Location { get; set; }
-        public int LocationId { get; set; }
         public DateTime Date { get; set; }
         public string PictureUrl { get; set; }
         public string MeetingType { get; set; }
