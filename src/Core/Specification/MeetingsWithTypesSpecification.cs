@@ -10,6 +10,8 @@ namespace Core.Specification
                 (!meetingParams.TypeId.HasValue || x.MeetingTypeId == meetingParams.TypeId))
         {
             AddInclude(x => x.MeetingType);
+            AddInclude(x => x.Location);
+
             AddOrderBy(x => x.Name);
             ApplyPaging(meetingParams.PageSize * (meetingParams.PageIndex - 1), meetingParams.PageSize);
 
