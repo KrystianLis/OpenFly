@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using System.ComponentModel.DataAnnotations;
 
 namespace Core.Identity
 {
@@ -11,7 +10,6 @@ namespace Core.Identity
         public string City { get; set; }
         public string ZipCode { get; set; }
         public string UserId { get; set; }
-        [Required]
         public User User { get; set; }
     }
 }
