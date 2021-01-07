@@ -11,7 +11,7 @@ namespace Infrastructure.Data
 {
     public class MeetingContextSeed
     {
-        public static async Task SeedAsync(MeetingContext context, ILoggerFactory loggerFactory)
+        public static async Task SeedAsync(AppDbContext context, ILoggerFactory loggerFactory)
         {
             try
             {

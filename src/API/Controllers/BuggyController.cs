@@ -6,8 +6,9 @@ namespace API.Controllers
 {
     public class BuggyController : BaseApiController
     {
-        private readonly MeetingContext _context;
-        public BuggyController(MeetingContext context)
+        private readonly AppDbContext _context;
+
+        public BuggyController(AppDbContext context)
         {
             _context = context;
 

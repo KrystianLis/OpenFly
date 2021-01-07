@@ -1,7 +1,6 @@
 using API.Extensions;
 using API.Middleware;
 using Infrastructure.Data;
-using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -19,18 +18,12 @@ namespace API
             _config = config;
         }
 
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<MeetingContext>(x =>
+            services.AddDbContext<AppDbContext>(x =>
                 x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
-
-            services.AddDbContext<AppIdentityDbContext>(x =>
-            {
-                x.UseSqlServer(_config.GetConnectionString("IdentityConnection"));
-            });
 
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();

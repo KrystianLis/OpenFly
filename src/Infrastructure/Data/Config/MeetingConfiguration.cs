@@ -19,6 +19,8 @@ namespace Infrastructure.Data.Config
                 .HasForeignKey(x => x.MeetingTypeId);
             builder.HasOne(x => x.Location).WithMany()
                 .HasForeignKey(x => x.LocationId);
+            builder.HasOne(x => x.Organizer).WithMany()
+                .HasForeignKey(x => x.OrganizerId);
         }
     }
 }

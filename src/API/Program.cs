@@ -21,7 +21,7 @@ namespace API
 
                 try
                 {
-                    var context = services.GetRequiredService<MeetingContext>();
+                    var context = services.GetRequiredService<AppDbContext>();
                     await context.Database.MigrateAsync();
                     await MeetingContextSeed.SeedAsync(context, loggerFactory);
                 }

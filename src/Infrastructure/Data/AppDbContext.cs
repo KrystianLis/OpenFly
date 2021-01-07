@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -9,17 +10,15 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class MeetingContext : DbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
-        public MeetingContext(DbContextOptions<MeetingContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
 
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<MeetingType> MeetingTypes { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<UserMeeting> UsersMeetings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
