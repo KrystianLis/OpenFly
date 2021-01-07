@@ -26,6 +26,7 @@ namespace API
                 x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
 
             services.AddApplicationServices();
+            services.AddIdentityServices();
             services.AddSwaggerDocumentation();
 
 
