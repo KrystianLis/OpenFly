@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class MeetingContextSeed
+    public class AppDbContextSeed
     {
         public static async Task SeedAsync(AppDbContext context, ILoggerFactory loggerFactory)
         {
@@ -56,7 +56,7 @@ namespace Infrastructure.Data
             }
             catch (Exception ex)
             {
-                var logger = loggerFactory.CreateLogger<MeetingContextSeed>();
+                var logger = loggerFactory.CreateLogger<AppDbContextSeed>();
                 logger.LogError(ex.Message);
             }
         }
