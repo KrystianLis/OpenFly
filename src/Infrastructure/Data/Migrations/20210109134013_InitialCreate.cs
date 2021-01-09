@@ -26,8 +26,8 @@ namespace Infrastructure.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
                     Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -109,12 +109,12 @@ namespace Infrastructure.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: true),
+                    City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    ZipCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateModified = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -126,7 +126,7 @@ namespace Infrastructure.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -283,7 +283,8 @@ namespace Infrastructure.Data.Migrations
                 name: "IX_Address_UserId",
                 table: "Address",
                 column: "UserId",
-                unique: true);
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

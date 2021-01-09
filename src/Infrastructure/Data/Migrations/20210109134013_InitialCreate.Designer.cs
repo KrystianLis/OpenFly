@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210107222444_InitialCreate")]
+    [Migration("20210109134013_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,7 +152,8 @@ namespace Infrastructure.Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -161,25 +162,31 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(75)
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ZipCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Address");
                 });
@@ -205,12 +212,10 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
@@ -443,9 +448,7 @@ namespace Infrastructure.Data.Migrations
                 {
                     b.HasOne("Core.Identity.User", "User")
                         .WithOne("Address")
-                        .HasForeignKey("Core.Identity.Address", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Core.Identity.Address", "UserId");
 
                     b.Navigation("User");
                 });
