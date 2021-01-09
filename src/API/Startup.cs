@@ -26,7 +26,7 @@ namespace API
                 x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
 
             services.AddApplicationServices();
-            services.AddIdentityServices();
+            services.AddIdentityServices(_config);
             services.AddSwaggerDocumentation();
 
 
@@ -53,6 +53,7 @@ namespace API
 
             app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSwaggerDocumentation();
