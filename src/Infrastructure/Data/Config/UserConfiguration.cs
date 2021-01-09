@@ -18,9 +18,6 @@ namespace Infrastructure.Data.Config
             builder.Property(x => x.UserName)
                 .IsRequired()
                 .HasMaxLength(25);
-            builder.Property(x => x.Password)
-                .IsRequired()
-                .HasMaxLength(50);
 
             builder.HasOne(x => x.Address)
                 .WithOne(x => x.User)
