@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Infrastructure.Services
 {
-    class TokenService : ITokenService
+    public class TokenService : ITokenService
     {
         private readonly IConfiguration _config;
         public readonly SymmetricSecurityKey _key;
