@@ -26,7 +26,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Pagination<MeetingDto>>> GetMeetings([FromQuery] MeetingSpecParams meetingParams)
+        public async Task<ActionResult<Pagination<MeetingDTO>>> GetMeetings([FromQuery] MeetingSpecParams meetingParams)
         {
             var spec = new MeetingsWithTypesSpecification(meetingParams);
 
@@ -36,15 +36,15 @@ namespace API.Controllers
 
             var meetings = await _meetingRepo.ListAsync(spec);
 
-            var data = _mapper.Map<IReadOnlyList<Meeting>, IReadOnlyList<MeetingDto>>(meetings);
+            var data = _mapper.Map<IReadOnlyList<Meeting>, IReadOnlyList<MeetingDTO>>(meetings);
 
-            return Ok(new Pagination<MeetingDto>(meetingParams.PageIndex, meetingParams.PageSize, totalItems, data));
+            return Ok(new Pagination<MeetingDTO>(meetingParams.PageIndex, meetingParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<MeetingDto>> GetMeeting(int id)
+        public async Task<ActionResult<MeetingDTO>> GetMeeting(int id)
         {
             var spec = new MeetingsWithTypesSpecification(id);
             var meeting = await _meetingRepo.GetEntityWithSpec(spec);
@@ -54,7 +54,7 @@ namespace API.Controllers
                 return NotFound(new ApiResponse(404));
             }
 
-            return _mapper.Map<Meeting, MeetingDto>(meeting);
+            return _mapper.Map<Meeting, MeetingDTO>(meeting);
         }
 
         [HttpGet("types")]
