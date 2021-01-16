@@ -76,7 +76,7 @@ namespace API.Controllers
                 return Ok(_mapper.Map<Address, AddressDTO>(user.Address));
             }
 
-            return BadRequest("Problem Updating the user");
+            return BadRequest("Problem updating the user");
         }
 
         [HttpPost("login")]
