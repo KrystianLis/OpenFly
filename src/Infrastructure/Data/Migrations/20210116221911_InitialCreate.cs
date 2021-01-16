@@ -113,6 +113,7 @@ namespace Infrastructure.Data.Migrations
                     Street = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: true),
                     City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     ZipCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateModified = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -220,7 +221,7 @@ namespace Infrastructure.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     OrganizerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IsPrivate = table.Column<bool>(type: "bit", nullable: false),
                     LocationId = table.Column<int>(type: "int", nullable: false),
