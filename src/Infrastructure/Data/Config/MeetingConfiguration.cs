@@ -10,7 +10,7 @@ namespace Infrastructure.Data.Config
         {
             builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(200);
+            builder.Property(x => x.Description).HasMaxLength(200);
             builder.Property(x => x.IsPrivate).IsRequired();
             builder.Property(x => x.LocationId).IsRequired();
             builder.Property(x => x.Date).IsRequired();
