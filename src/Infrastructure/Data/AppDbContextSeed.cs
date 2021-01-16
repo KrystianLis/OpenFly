@@ -1,5 +1,5 @@
 ﻿using Core.Entities;
-using Core.Identity;
+using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;

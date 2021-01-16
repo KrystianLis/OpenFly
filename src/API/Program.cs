@@ -1,4 +1,4 @@
-using Core.Identity;
+using Core.Entities.Identity;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

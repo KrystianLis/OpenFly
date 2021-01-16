@@ -1,4 +1,4 @@
-﻿using Core.Identity;
+﻿using Core.Entities.Identity;
 
 namespace Core.Interfaces
 {

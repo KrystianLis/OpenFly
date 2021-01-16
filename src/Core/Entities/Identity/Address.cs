@@ -1,6 +1,4 @@
-﻿using Core.Entities;
-
-namespace Core.Identity
+﻿namespace Core.Entities.Identity
 {
     public class Address : BaseEntity
     {

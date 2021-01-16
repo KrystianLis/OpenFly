@@ -1,8 +1,7 @@
-using Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace Core.Identity
+namespace Core.Entities.Identity
 {
     public class User : IdentityUser
     {
