@@ -22,6 +22,8 @@ namespace Infrastructure.Data.Config
                 .HasMaxLength(30);
             builder.Property(x => x.ZipCode)
                 .HasMaxLength(10);
+            builder.Property(x => x.Country)
+                .HasMaxLength(30);
         }
     }
 }
