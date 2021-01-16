@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTO;
 using API.Errors;
+using API.Extensions;
 using API.Helpers;
 using AutoMapper;
 using Core.Entities;
+using Core.Entities.Identity;
 using Core.Interfaces;
 using Core.Specification;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,12 +22,17 @@ namespace API.Controllers
     {
         private readonly IGenericRepository<Meeting> _meetingRepo;
         private readonly IGenericRepository<MeetingType> _meetingTypeRepo;
+        private readonly UserManager<User> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public MeetingsController(IGenericRepository<Meeting> meetingRepo, IGenericRepository<MeetingType> meetingTypeRepo, IMapper mapper)
+        public MeetingsController(IGenericRepository<Meeting> meetingRepo, IGenericRepository<MeetingType> meetingTypeRepo, UserManager<User> userManager,
+            IUnitOfWork unitOfWork, IMapper mapper)
         {
             _meetingRepo = meetingRepo;
             _meetingTypeRepo = meetingTypeRepo;
+            _userManager = userManager;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -62,5 +73,20 @@ namespace API.Controllers
         {
             return Ok(await _meetingTypeRepo.ListAsync());
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult<CreateMeetingDTO>> CreateMeeting(CreateMeetingDTO meetingDto)
+        {
+            var meeting = _mapper.Map<CreateMeetingDTO, Meeting>(meetingDto);
+
+            var user = await _userManager.FindByEmailAsync(HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value);
+            meeting.OrganizerId = user.Id;
+
+            _unitOfWork.Repository<Meeting>().Create(meeting);
+            await _unitOfWork.Complete();
+
+            return Ok(meetingDto);
+        } 
     }
 }
