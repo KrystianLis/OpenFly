@@ -46,6 +46,12 @@ namespace API.Controllers
             return await _userManager.FindByEmailAsync(email) != null;
         }
 
+        [HttpGet("usernameexists")]
+        public async Task<ActionResult<bool>> CheckUserNameExistsAsync([FromQuery] string username)
+        {
+            return await _userManager.FindByNameAsync(username) != null;
+        }
+
         [Authorize]
         [HttpGet("address")]
         public async Task<ActionResult<AddressDTO>> GetUserAddressAsync()
@@ -101,6 +107,22 @@ namespace API.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDto)
         {
+            if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
+            {
+                return new BadRequestObjectResult(new ApiValidationErrorResponse
+                {
+                    Errors = new[] { "Email address is in use" }
+                });
+            }
+
+            if (CheckUserNameExistsAsync(registerDto.UserName).Result.Value)
+            {
+                return new BadRequestObjectResult(new ApiValidationErrorResponse
+                {
+                    Errors = new[] { "UserName is in use" }
+                });
+            }
+
             var user = new User
             {
                 UserName = registerDto.UserName,
