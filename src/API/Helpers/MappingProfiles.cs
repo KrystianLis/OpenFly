@@ -13,6 +13,9 @@ namespace API.Helpers
                 .ForMember(d => d.MeetingType, o => o.MapFrom(s => s.MeetingType.Name))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<MeetingUrlResolver>());
 
+            CreateMap<Meeting, CreateMeetingDTO>()
+                .ReverseMap();
+
             CreateMap<Address, AddressDTO>()
                 .ReverseMap();
         }
