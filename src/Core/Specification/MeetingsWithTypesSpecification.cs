@@ -11,6 +11,7 @@ namespace Core.Specification
         {
             AddInclude(x => x.MeetingType);
             AddInclude(x => x.Location);
+            AddInclude(x => x.Organizer);
 
             AddOrderBy(x => x.Name);
             ApplyPaging(meetingParams.PageSize * (meetingParams.PageIndex - 1), meetingParams.PageSize);

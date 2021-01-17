@@ -9,7 +9,7 @@ namespace API.DTO
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Organizer { get; set;}
+        public string OrganizerUserName { get; set;}
         public bool IsPrivate { get; set; }
         public Location Location { get; set; }
         public DateTime Date { get; set; }
