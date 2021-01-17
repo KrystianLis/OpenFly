@@ -83,10 +83,19 @@ namespace API.Controllers
             var user = await _userManager.FindByEmailAsync(HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value);
             meeting.OrganizerId = user.Id;
 
+            meeting.UserMeeting = new List<UserMeeting>
+            {
+                new UserMeeting
+                {
+                    User = user,
+                    Meeting = meeting
+                }
+            };
+
             _unitOfWork.Repository<Meeting>().Create(meeting);
             await _unitOfWork.Complete();
 
             return Ok(meetingDto);
-        } 
+        }
     }
 }
