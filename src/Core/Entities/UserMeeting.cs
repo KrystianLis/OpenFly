@@ -2,7 +2,7 @@ using Core.Entities.Identity;
 
 namespace Core.Entities
 {
-    public class UserMeeting
+    public class UserMeeting : BaseEntity
     {
         public string UserId { get; set; }
         public User User { get; set; }

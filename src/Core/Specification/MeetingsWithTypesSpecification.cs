@@ -36,6 +36,8 @@ namespace Core.Specification
         public MeetingsWithTypesSpecification(int id) : base(x => x.Id == id)
         {
             AddInclude(x => x.MeetingType);
+            AddInclude(x => x.Location);
+            AddInclude(x => x.Organizer);
         }
     }
 }
