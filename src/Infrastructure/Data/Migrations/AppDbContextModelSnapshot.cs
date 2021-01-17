@@ -266,9 +266,6 @@ namespace Infrastructure.Data.Migrations
                     b.Property<DateTime>("DateModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId", "MeetingId");
 
                     b.HasIndex("MeetingId");

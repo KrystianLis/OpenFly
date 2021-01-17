@@ -8,6 +8,7 @@ namespace Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<UserMeeting> builder)
         {
+            builder.Ignore(c => c.Id);
             builder.HasKey(x => new { x.UserId, x.MeetingId });
             builder.HasOne(x => x.Meeting)
                 .WithMany(x => x.UserMeeting)
