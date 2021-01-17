@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTO;
 using API.Errors;
-using API.Extensions;
 using API.Helpers;
 using AutoMapper;
 using Core.Entities;
@@ -96,6 +95,31 @@ namespace API.Controllers
             await _unitOfWork.Complete();
 
             return Ok(meetingDto);
+        }
+
+        [Authorize]
+        [HttpPost("signup/{id}")]
+        public async Task<ActionResult> MeetingSignUp(int id)
+        {
+            var meeting = await _unitOfWork.Repository<Meeting>().GetByIdAsync(id);
+
+            if(meeting is null)
+            {
+                return NotFound(new ApiResponse(404));
+            }
+
+            var user = await _userManager.FindByEmailAsync(HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value);
+
+            var userMeeting = new UserMeeting
+            {
+                User = user,
+                Meeting = meeting
+            };
+
+            _unitOfWork.Repository<UserMeeting>().Create(userMeeting);
+            await _unitOfWork.Complete();
+
+            return StatusCode(201);
         }
     }
 }
