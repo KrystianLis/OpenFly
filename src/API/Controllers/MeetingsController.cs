@@ -110,6 +110,15 @@ namespace API.Controllers
 
             var user = await _userManager.FindByEmailAsync(HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value);
 
+            var spec = new UserMeetingSpecification(user.Id, meeting.Id);
+
+            var entity = await _unitOfWork.Repository<UserMeeting>().GetEntityWithSpec(spec);
+
+            if(entity is { })
+            {
+                return BadRequest(new ApiResponse(400, "The user is already added to the resource"));
+            }
+
             var userMeeting = new UserMeeting
             {
                 User = user,
